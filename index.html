@@ -1,15 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <!-- Cosmo Bootstrap Theme -->
+  <link rel="stylesheet" href="https://bootswatch.com/4/cosmo/bootstrap.min.css">
+
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
   <title>My JavaScript App</title>
 </head>
+
 <body>
-  <h1>Custom App</h1>
-  <p>This app was compiled using the Babel Webpack Starter Pack which can compile ES2015, ES2016 and ES2017 code including Async/Await</p>
-  
+
+  <!-- Nav Bar -->
+  <nav class="navbar navbar-dark bg-primary mb-3">
+    <div class="container">
+      <a href="#" class="navbar-brand">Mini Pub</a>
+    </div>
+  </nav>
+  <!-- Nav Bar -->
+
+  <!-- Body -->
+  <div class="container post-container">
+    <div class="card card-body card-form">
+
+      <h1>Hello 👋</h1>
+      <p class="lead">What's on your mind?</p>
+      
+      <!-- Post input section -->
+      <div class="form-group">
+        <input type="text" name="" id="title" class="form-control" placeholder="Post Title">
+      </div>
+
+      <div class="form-group">
+        <textarea name="" id="body" class="form-control" placeholder="Your thoughts?"></textarea>
+      </div>
+
+      <input type="hidden" id="id" value="">
+      <button class="post-submit btn btn-primary btn-block">Publish</button>
+
+      <span class="form-end"></span>
+      <!-- Post input section -->
+      
+
+    </div>
+
+    <br>
+
+    <!-- Published posts section -->
+    <div id="posts">
+
+    </div>
+    <!-- Published posts section -->
+
+
+    <!-- Footer-->
+    <footer class="mt-5 p-3 text-center bg-light">
+
+      Mini Pub &copy;
+
+    </footer>
+    <!-- Footer-->
+
+
+  </div>
+  <!-- Body -->
+
+
   <script src="build/app.bundle.js"></script>
 </body>
+
 </html>
