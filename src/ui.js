@@ -73,7 +73,7 @@ class UI {
 
 			this.clearSuccessAlert();
 
-		}, 10500);
+		}, 2500);
 
 
 	}
