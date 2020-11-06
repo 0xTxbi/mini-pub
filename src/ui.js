@@ -48,6 +48,7 @@ class UI {
 
 	}
 
+	// Display success alert on post addition or deletion
 	displaySuccessAlert(msg, clsName) {
 
 		this.clearSuccessAlert();
@@ -78,6 +79,7 @@ class UI {
 
 	}
 
+	// Clear success alert if a new one is to appear
 	clearSuccessAlert() {
 
 		const currentAlert = document.querySelector('.alert');
@@ -91,10 +93,20 @@ class UI {
 
 	}
 
+	// Clear form input fields
 	clearInputFields() {
 
 		this.titleInput.value = '';
 		this.bodyInput.value = '';
+
+	}
+
+	// Populate form to edit
+	fillForm(data) {
+		
+		this.titleInput.value = data.title;
+		this.bodyInput.value = data.body;
+		this.idInput.value = data.id;
 
 	}
 

@@ -66,6 +66,41 @@ const deletePost = (e) => {
 document.querySelector('#posts').addEventListener('click', deletePost);
 
 
+// Function to change UI when updating a post item
+const editState = (e) => {
+
+	if (e.target.parentElement.classList.contains('edit')) {
+
+		const id = e.target.parentElement.dataset.id;
+
+		// Post title text
+		const title = e.target.parentElement.previousElementSibling.previousElementSibling.textContent;
+
+		// Post content text
+		const body = e.target.parentElement.previousElementSibling.textContent;
+
+		const data = {
+
+			id,
+			title,
+			body
+
+		};
+
+		// Populate form input values with selected post
+		ui.fillForm(data);
+
+
+	}
+
+	e.preventDefault();
+
+};
+
+
+// Listener event to edit the UI's state
+document.querySelector('#posts').addEventListener('click', editState);
+
 // Function to obtain posts
 const getPosts = () => {
 
