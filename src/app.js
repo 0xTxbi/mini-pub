@@ -4,6 +4,7 @@ import { http } from './http';
 // Import the UI module
 import { ui } from './ui';
 
+// Function to submit post
 const submitPost = () => {
 
 	const title = document.querySelector('#title').value;
@@ -32,7 +33,40 @@ const submitPost = () => {
 // Listener event for adding posts
 document.querySelector('.post-submit').addEventListener('click', submitPost);
 
-// Define function to obtain posts
+
+// Function to delete post
+const deletePost = (e) => {
+
+	if (e.target.parentElement.classList.contains('delete')) {
+
+		const id = e.target.parentElement.dataset.id;
+
+		if (confirm('Are you sure?')) {
+
+			http.delete(`http://localhost:3000/posts/${id}`)
+				.then(data => {
+
+					ui.displaySuccessAlert('Post has been successfully deleted', 'alert alert-warning');
+
+					getPosts();
+
+				})
+				.catch(err => console.log(err));
+
+		}
+
+	}
+
+	e.preventDefault();
+
+};
+
+
+// Listener event to delete selected post
+document.querySelector('#posts').addEventListener('click', deletePost);
+
+
+// Function to obtain posts
 const getPosts = () => {
 
 	http.get('http://localhost:3000/posts')
