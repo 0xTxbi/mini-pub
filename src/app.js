@@ -4,6 +4,33 @@ import { http } from './http';
 // Import the UI module
 import { ui } from './ui';
 
+const submitPost = () => {
+
+	const title = document.querySelector('#title').value;
+	const body = document.querySelector('#body').value;
+
+	const data = {
+
+		title,
+		body
+
+	};
+
+	http.post('http://localhost:3000/posts', data)
+		.then(data => {
+
+			getPosts();
+
+			ui.displaySuccessAlert('Post has been successfully added', 'alert alert-success');
+			ui.clearInputFields();
+
+		})
+		.catch(err => console.log(err));
+
+};
+
+// Listener event for adding posts
+document.querySelector('.post-submit').addEventListener('click', submitPost);
 
 // Define function to obtain posts
 const getPosts = () => {
@@ -15,7 +42,7 @@ const getPosts = () => {
 };
 
 
-// GET Posts when DOM loads
+// Listener event to GET Posts when the DOM loads
 document.addEventListener('DOMContentLoaded', getPosts);
 
 

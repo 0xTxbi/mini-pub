@@ -12,7 +12,7 @@ class UI {
 	}
 
 	// Display posts
-	displayPosts (posts) {
+	displayPosts(posts) {
 
 		let output = '';
 
@@ -45,6 +45,56 @@ class UI {
 		});
 
 		this.post.innerHTML = output;
+
+	}
+
+	displaySuccessAlert(msg, clsName) {
+
+		this.clearSuccessAlert();
+
+		// Create a div
+		const div = document.createElement('div');
+		// Add class
+		div.className = clsName;
+		// Add text
+		div.appendChild(document.createTextNode(msg));
+
+		// Insert into the DOM
+		// Get parent
+		const container = document.querySelector('.post-container');
+		// Get posts
+		const posts = document.querySelector('#posts');
+
+		// Insert the div
+		container.insertBefore(div, posts);
+
+		// Timeout
+		setTimeout(() => {
+
+			this.clearSuccessAlert();
+
+		}, 10500);
+
+
+	}
+
+	clearSuccessAlert() {
+
+		const currentAlert = document.querySelector('.alert');
+
+		// Check if an alert is currently displaying
+		if (currentAlert) {
+			
+			currentAlert.remove();
+
+		}
+
+	}
+
+	clearInputFields() {
+
+		this.titleInput.value = '';
+		this.bodyInput.value = '';
 
 	}
 
