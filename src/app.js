@@ -1,13 +1,16 @@
 // Import the HTTP library
 import { http } from './http';
 
+// Import the UI module
+import { ui } from './ui';
+
 
 // Define function to obtain posts
 const getPosts = () => {
 
 	http.get('http://localhost:3000/posts')
-	.then(data => console.log(data))
-	.catch(err => console.log(err));
+		.then(data => ui.displayPosts(data))
+		.catch(err => console.log(err));
 
 };
 
