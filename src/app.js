@@ -9,6 +9,7 @@ const submitPost = () => {
 
 	const title = document.querySelector('#title').value;
 	const body = document.querySelector('#body').value;
+	const id = document.querySelector('#id').value;
 
 	const data = {
 
@@ -17,16 +18,47 @@ const submitPost = () => {
 
 	};
 
-	http.post('http://localhost:3000/posts', data)
-		.then(data => {
+	// Validate form input
+	if (title === '' || body === '') {
 
-			getPosts();
+		ui.displayAlert('Please fill in all input fields', 'alert alert-danger');
 
-			ui.displaySuccessAlert('Post has been successfully added', 'alert alert-success');
-			ui.clearInputFields();
+	} else {
 
-		})
-		.catch(err => console.log(err));
+		// Check for available ID
+		if (id === '') {
+
+			// Create Post
+			http.post('http://localhost:3000/posts', data)
+				.then(data => {
+
+					getPosts();
+
+					ui.displayAlert('Post has been successfully added', 'alert alert-success');
+					ui.clearInputFields();
+
+				})
+				.catch(err => console.log(err));
+
+		} else {
+
+			// Update the post
+			http.put(`http://localhost:3000/posts/${id}`, data)
+				.then(data => {
+
+					ui.displayAlert('Post has been successfully updated', 'alert alert-success');
+
+					ui.alterFormState('add');
+
+					getPosts();
+
+				})
+				.catch(err => console.log(err));
+
+		}
+
+
+	}
 
 };
 
@@ -100,6 +132,23 @@ const editState = (e) => {
 
 // Listener event to edit the UI's state
 document.querySelector('#posts').addEventListener('click', editState);
+
+
+// Function to cancel the post edit state
+const cancelEditState = (e) => {
+
+	if (e.target.classList.contains('cancel-edit')) {
+
+		ui.alterFormState('add');
+
+		e.preventDefault();
+
+	}
+
+};
+
+// Listener event for cancel edit state button
+document.querySelector('.card-form').addEventListener('click', cancelEditState);
 
 // Function to obtain posts
 const getPosts = () => {

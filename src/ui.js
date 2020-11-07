@@ -49,7 +49,7 @@ class UI {
 	}
 
 	// Display success alert on post addition or deletion
-	displaySuccessAlert(msg, clsName) {
+	displayAlert(msg, clsName) {
 
 		this.clearSuccessAlert();
 
@@ -86,7 +86,7 @@ class UI {
 
 		// Check if an alert is currently displaying
 		if (currentAlert) {
-			
+
 			currentAlert.remove();
 
 		}
@@ -103,10 +103,63 @@ class UI {
 
 	// Populate form to edit
 	fillForm(data) {
-		
+
 		this.titleInput.value = data.title;
 		this.bodyInput.value = data.body;
 		this.idInput.value = data.id;
+
+		this.alterFormState('edit');
+
+	}
+
+	// Clear ID input
+	clearIdInput() {
+
+		this.idInput.value = '';
+
+	}
+
+	// Alter form state
+	alterFormState(type) {
+
+		if (type === 'edit') {
+
+			this.submitPost.textContent = 'Update post';
+			this.submitPost.className = 'post-submit btn btn-warning btn-block';
+
+			// Create cancel button
+			const button = document.createElement('button');
+			button.className = 'cancel-edit btn btn-light btn-block';
+			button.appendChild(document.createTextNode('Cancel'));
+
+
+			// Insert into DOM
+			// Obtain parent
+			const cardForm = document.querySelector('.card-form');
+			// Select element to insert before
+			const formEnd = document.querySelector('.form-end');
+			// Insert cancel button
+			cardForm.insertBefore(button, formEnd);
+
+		} else {
+
+			this.submitPost.textContent = 'Publish';
+			this.submitPost.className = 'post-submit btn btn-primary btn-block';
+
+			// Remove cancel button if present
+			if (document.querySelector('.cancel-edit')) {
+
+				document.querySelector('.cancel-edit').remove();
+
+			}
+
+			// Clear ID from input field
+			this.clearIdInput();
+
+			// Clear input fields
+			this.clearInputFields();
+
+		}
 
 	}
 
